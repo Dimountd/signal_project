@@ -5,13 +5,21 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Executors;
-//updated file name to TcpOutputStrategy.java
+
+/**
+ * Sends patient health data with TCP.
+ */
 public class TCPOutputStrategy implements OutputStrategy {
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
 
+    /**
+     * Creates a TCP output strategy.
+     *
+     * @param port The port of TCP server.
+     */
     public TCPOutputStrategy(int port) {
         try {
             serverSocket = new ServerSocket(port);
@@ -32,6 +40,14 @@ public class TCPOutputStrategy implements OutputStrategy {
         }
     }
 
+    /**
+     * Sends health data to the client.
+     *
+     * @param patientId The ID of the patient.
+     * @param timestamp The timestamp of the data.
+     * @param label     The label describing the data type.
+     * @param data      The data to be sent.
+     */
     @Override
     public void output(int patientId, long timestamp, String label, String data) {
         if (out != null) {
