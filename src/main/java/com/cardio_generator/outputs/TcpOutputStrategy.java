@@ -5,14 +5,14 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Executors;
-
-public class TcpOutputStrategy implements OutputStrategy {
+//updated file name to TcpOutputStrategy.java
+public class TCPOutputStrategy implements OutputStrategy {
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
 
-    public TcpOutputStrategy(int port) {
+    public TCPOutputStrategy(int port) {
         try {
             serverSocket = new ServerSocket(port);
             System.out.println("TCP Server started on port " + port);
