@@ -4,23 +4,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.alerts.AlertGenerator;
 
 /**
  * Manages storage and retrieval of patient data within a healthcare monitoring
  * system.
  * This class serves as a repository for all patient records, organized by
  * patient IDs.
+ * Implemented as a Singleton.
  */
 public class DataStorage {
+    private static DataStorage instance;
     private Map<Integer, Patient> patientMap; // Stores patient objects indexed by their unique patient ID.
 
     /**
-     * Constructs a new instance of DataStorage, initializing the underlying storage
-     * structure.
+     * Private constructor to prevent instantiation from outside.
+     * Initializes the underlying storage structure.
      */
-    public DataStorage() {
+    private DataStorage() {
         this.patientMap = new HashMap<>();
+    }
+
+    /**
+     * Returns the singleton instance of DataStorage.
+     *
+     * @return the singleton instance
+     */
+    public static synchronized DataStorage getInstance() {
+        if (instance == null) {
+            instance = new DataStorage();
+        }
+        return instance;
     }
 
     /**
@@ -93,12 +106,12 @@ public class DataStorage {
         }
 
         DataReader reader = new FileDataReader(dataDirectory);
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance(); // Use Singleton instance
 
         // Assuming the reader has been properly initialized and can read data into the
         // storage
         try {
-            reader.readData(storage); // Uncommented and added try-catch
+            reader.readData(storage);
         } catch (java.io.IOException e) {
             System.err.println("Error reading data: " + e.getMessage());
             e.printStackTrace();
@@ -114,7 +127,9 @@ public class DataStorage {
         }
 
         // Initialize the AlertGenerator with the storage
-        AlertGenerator alertGenerator = new AlertGenerator();
+        // This part needs to be updated based on how AlertGenerator is refactored.
+        // For now, we assume AlertGenerator might be instantiated differently or also be a Singleton.
+        com.alerts.AlertGenerator alertGenerator = new com.alerts.AlertGenerator(); // Assuming default constructor
 
         // Evaluate all patients' data to check for conditions that may trigger alerts
         for (Patient patient : storage.getAllPatients()) {

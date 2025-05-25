@@ -62,4 +62,9 @@ public class Patient {
         return filteredRecords;
     }
 
+    public char[] getPatientId() {
+      // TODO Auto-generated method stub
+      throw new UnsupportedOperationException("Unimplemented method 'getPatientId'");
+    }
+
 }
