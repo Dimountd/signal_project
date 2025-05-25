@@ -2,12 +2,15 @@ package com.data_management;
 
 import java.io.IOException;
 
+/**
+ * Interface for reading patient data from a source.
+ */
 public interface DataReader {
     /**
-     * Reads data from a specified source and stores it in the data storage.
-     * 
-     * @param dataStorage the storage where data will be stored
-     * @throws IOException if there is an error reading the data
+     * Reads data from the source and stores it in the provided DataStorage.
+     *
+     * @param dataStorage The DataStorage instance to populate with patient data.
+     * @throws IOException If an error occurs during data reading.
      */
     void readData(DataStorage dataStorage) throws IOException;
 }

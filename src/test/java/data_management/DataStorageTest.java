@@ -12,9 +12,9 @@ class DataStorageTest {
 
     @Test
     void testAddAndGetRecords() {
-        // TODO Perhaps you can implement a mock data reader to mock the test data?
-        // DataReader reader
-        DataStorage storage = new DataStorage(reader);
+        // TODO: Testing with FileDataReader is now covered in FileDataReaderTest.
+        // This test focuses on DataStorage's own logic after data is added.
+        DataStorage storage = new DataStorage(); // Use the default constructor
         storage.addPatientData(1, 100.0, "WhiteBloodCells", 1714376789050L);
         storage.addPatientData(1, 200.0, "WhiteBloodCells", 1714376789051L);
 
